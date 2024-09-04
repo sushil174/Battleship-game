@@ -1,9 +1,9 @@
-import ship from "../ship";
+import Ship from "../Ship";
 
 describe('Ship object', () => {
     let shipTest;
     beforeEach(()=> {
-        shipTest = new ship()
+        shipTest = new Ship()
     });
 
     test('ship hit', () => {
@@ -14,12 +14,14 @@ describe('Ship object', () => {
     })
 
     test('ship isSunk', ()=> {
+
         expect(shipTest.isSunk()).toBeFalsy();
         shipTest.hit()
         shipTest.hit()
         shipTest.hit()
         shipTest.hit()
         expect(shipTest.isSunk()).toBeTruthy();
+        
     })
 })
 
