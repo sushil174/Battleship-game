@@ -31,6 +31,10 @@ class GameBoard {
         this.board[x][y] = "attacked"
         return "Miss"
     }
+
+    allSunk() {
+        return this.ships.every((ship) => ship.isSunk());
+    }
 }
 
 export default GameBoard

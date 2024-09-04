@@ -35,5 +35,13 @@ describe('GameBoard object', () => {
             gameBoard.placeShip(ship2,[[1,2],[1,3]])
         }).toThrow("invalid position")
     })
+
+    test('all ships sunks', ()=> {
+        let ship = new Ship(1)
+        gameBoard.placeShip(ship,[[0,0]])
+        expect(gameBoard.allSunk()).toBeFalsy()
+        gameBoard.receiveAttack([0,0])
+        expect(gameBoard.allSunk()).toBeTruthy()
+    })
 })
 
