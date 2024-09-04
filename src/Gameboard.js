@@ -21,6 +21,16 @@ class GameBoard {
         this.ships.push(ship)
     }
 
+    receiveAttack(coords) {
+        const [x,y] = coords
+        const target = this.board[x][y]
+        if(target !== null) {
+            target.hit()
+            return "Hit"
+        }
+        this.board[x][y] = "attacked"
+        return "Miss"
+    }
 }
 
 export default GameBoard
