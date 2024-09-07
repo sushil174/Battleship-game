@@ -14,6 +14,10 @@ class Ship {
         return this.damage
     }
 
+    getLength() {
+        return this.length
+    }
+    
     isSunk() {
         if (this.length <= this.damage) {
             this.sunk = true

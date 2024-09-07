@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    gap: 100px;
+}
+
+.player {
+    display: grid;
+    grid-template-columns: repeat(10,50px);
+    grid-template-rows: repeat(10,50px);
+}
+
+.cell{
+    height: 50px;
+    width: 50px;
+    border: 1px solid black;
+    background-color: lightblue;
+}

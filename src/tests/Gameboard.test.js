@@ -37,10 +37,11 @@ describe('GameBoard object', () => {
     })
 
     test('all ships sunks', ()=> {
-        let ship = new Ship(1)
-        gameBoard.placeShip(ship,[[0,0]])
-        expect(gameBoard.allSunk()).toBeFalsy()
+        let ship = new Ship(2)
+        gameBoard.placeShip(ship,[[0,0],[0,1]])
         gameBoard.receiveAttack([0,0])
+        expect(gameBoard.allSunk()).toBeFalsy()
+        gameBoard.receiveAttack([0,1])
         expect(gameBoard.allSunk()).toBeTruthy()
     })
 })

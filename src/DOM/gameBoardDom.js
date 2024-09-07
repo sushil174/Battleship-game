@@ -1,21 +1,28 @@
 import Ship from "../Ship"
 class BoardDom {
-    constructor(gameBoard) {
+    constructor(gameBoard,show=true) {
         this.gameBoard = gameBoard
+        this.show = show
         this.cells = []
     }
 
     createBoard() {
+        const player = document.createElement('div')
+        player.classList.add('player')
         for(let i=0;i<10;i++) {
             let row = []
             for(let j=0;j<10;j++) {
                 const cell = document.createElement('div')
                 cell.dataset.x = i
                 cell.dataset.y = j
+                cell.classList.add('cell')
+                player.append(cell)
                 row.push(cell)
             }
             this.cells.push(row)
         }
+        this.randomShipPlacement()
+        return player
     }
 
     randomShipPlacement() {
@@ -33,6 +40,7 @@ class BoardDom {
         const ship8 = new Ship(1)
         const ship9 = new Ship(1)
         const ship10 = new Ship(1)
+
         let ships = [ship1,ship2,ship3,ship4,ship5,ship6,ship7,ship8,ship9,ship10]
 
         function getCoords(ship) {
@@ -58,12 +66,18 @@ class BoardDom {
                 coords = getCoords(ship)
             }
             this.gameBoard.placeShip(ship,coords)
+            if(this.show) {
+                for(let [x,y] of coords) {
+                    this.cells[x][y].style.backgroundColor = "blue"
+                }
+            }
         }
     }
 
     updateShip() {
         const ships = this.gameBoard.getShips()
         for(let ship of ships) {
+            this.gameBoard.placeShip(ship.getPosition())
             for(let [x,y] of ship.getPosition()) {
                 this.cells[x][y].style.backgroundColor = "blue"
             }
