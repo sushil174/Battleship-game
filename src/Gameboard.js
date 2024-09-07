@@ -45,13 +45,15 @@ class GameBoard {
             target.hit()
             return "Hit"
         }
+
+        // this.board[x][y] = "attacked"
         return "Miss"
     }
     shipSunk(x,y) {
         let ship = this.board[x][y]
         if(ship.isSunk()) {
             let coords = ship.getPosition()
-
+            
         }
     }
     getBoard() {

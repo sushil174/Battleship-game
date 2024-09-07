@@ -27,6 +27,17 @@ class BoardDom {
         return player
     }
 
+    sunkedShip() {
+        const ships = this.gameBoard.getShips() 
+        for(let ship of ships) {
+            if(ship.isSunk()) {
+                const coords = ship.getPosition() 
+                for(let [x,y] of coords) {
+                    this.cells[x][y].style.backgroundColor = "purple"
+                }
+            }
+        }
+    }
     attackListner(cell) {
         cell.addEventListener('click', () => {
             let x = cell.dataset.x
@@ -44,6 +55,7 @@ class BoardDom {
                 this.cells[x][y].style.pointerEvents = "none"
             }
 
+            this.sunkedShip()
             if(this.gameBoard.allSunk()) {
                 const headline = document.querySelector('.headline')
                 headline.textContent = "all ships sunked"
