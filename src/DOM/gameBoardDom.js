@@ -15,16 +15,42 @@ class BoardDom {
                 const cell = document.createElement('div')
                 cell.dataset.x = i
                 cell.dataset.y = j
+                cell.dataset.isAttacked = "nope"
                 cell.classList.add('cell')
+                this.attackListner(cell)
                 player.append(cell)
                 row.push(cell)
             }
             this.cells.push(row)
-        }
+        }   
         this.randomShipPlacement()
         return player
     }
 
+    attackListner(cell) {
+        cell.addEventListener('click', () => {
+            let x = cell.dataset.x
+            let y = cell.dataset.y
+            if(this.cells[x][y].dataset.isAttacked === "nope") {
+                // console.log("hitting-"+x+" "+y)
+                const result = this.gameBoard.receiveAttack([x,y])
+                if(result === "Hit") {
+                    this.cells[x][y].style.backgroundColor = "red"
+                }
+                else {
+                    this.cells[x][y].style.backgroundColor = "green"
+                }
+                this.cells[x][y].dataset.isAttacked = "yup"
+                this.cells[x][y].style.pointerEvents = "none"
+            }
+
+            if(this.gameBoard.allSunk()) {
+                const headline = document.querySelector('.headline')
+                headline.textContent = "all ships sunked"
+            }
+        })
+
+    }
     randomShipPlacement() {
         
         const ship1 = new Ship(4)
@@ -84,6 +110,9 @@ class BoardDom {
         }
     }
 
+    updateAttack() {
+        const ships = this.game
+    }
     recieveAttack([x,y]) {
         
     }
