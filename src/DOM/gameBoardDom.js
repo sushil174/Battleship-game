@@ -38,31 +38,38 @@ class BoardDom {
             }
         }
     }
-    attackListner(cell) {
-        cell.addEventListener('click', () => {
-            let x = cell.dataset.x
-            let y = cell.dataset.y
-            if(this.cells[x][y].dataset.isAttacked === "nope") {
-                // console.log("hitting-"+x+" "+y)
-                const result = this.gameBoard.receiveAttack([x,y])
-                if(result === "Hit") {
-                    this.cells[x][y].style.backgroundColor = "red"
-                }
-                else {
-                    this.cells[x][y].style.backgroundColor = "green"
-                }
-                this.cells[x][y].dataset.isAttacked = "yup"
-                this.cells[x][y].style.pointerEvents = "none"
-            }
 
-            this.sunkedShip()
-            if(this.gameBoard.allSunk()) {
-                const headline = document.querySelector('.headline')
-                headline.textContent = "all ships sunked"
+    fn(e) {
+
+        let x = e.target.dataset.x
+        let y = e.target.dataset.y
+        // if(this.cells[x][y].dataset.isAttacked === "nope") {
+            // console.log("hitting-"+x+" "+y) 
+            const result = this.gameBoard.receiveAttack([x,y])
+            if(result === "Hit") {
+                this.cells[x][y].style.backgroundColor = "red"
             }
-        })
+            else {
+                this.cells[x][y].style.backgroundColor = "green"
+            }
+            this.cells[x][y].dataset.isAttacked = "yup"
+            this.cells[x][y].style.pointerEvents = "none"
+        // }
+    
+        // this.sunkedShip()
+        if(this.gameBoard.allSunk()) {
+            const headline = document.querySelector('.headline')
+            headline.textContent = "all ships sunked"
+        }
+    }
+
+    attackListner(cell) {
+        cell.addEventListener('click', (e) => {
+            this.fn(e)
+        },{once:true})
 
     }
+    
     randomShipPlacement() {
         
         const ship1 = new Ship(4)
@@ -122,12 +129,6 @@ class BoardDom {
         }
     }
 
-    updateAttack() {
-        const ships = this.game
-    }
-    recieveAttack([x,y]) {
-        
-    }
 }
 
 export default BoardDom

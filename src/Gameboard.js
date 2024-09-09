@@ -43,19 +43,14 @@ class GameBoard {
         
         if(target instanceof Ship && target !== null) {
             target.hit()
+            this.board[x][y] = "hit"
             return "Hit"
         }
 
-        // this.board[x][y] = "attacked"
+        this.board[x][y] = "miss"
         return "Miss"
     }
-    shipSunk(x,y) {
-        let ship = this.board[x][y]
-        if(ship.isSunk()) {
-            let coords = ship.getPosition()
-            
-        }
-    }
+
     getBoard() {
         return this.board
     }

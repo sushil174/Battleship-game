@@ -1,9 +1,13 @@
 .container {
     display: flex;
-    gap: 100px;
+    flex-direction: column  ;
 }
 
-.player {
+.ground{
+    display: flex;
+    gap : 100px;
+}
+.player1, .player2 {
     display: grid;
     grid-template-columns: repeat(10,50px);
     grid-template-rows: repeat(10,50px);
