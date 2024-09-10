@@ -10,7 +10,6 @@ class Bot {
     }
 
     display() {
-        // this.player.textContent = ''
         let board = this.gameBoard.getBoard()
         for(let i = 0; i < 10; i++) {
             let row = []
@@ -35,12 +34,10 @@ class Bot {
                     cell.style.backgroundColor = "blue"
                 }
 
-                // cell.addEventListener('click',() => {
-                //     this.recieveAttack([i,j])
-                // },{ once: true })
             }
             this.cells.push(row)
         }
+        return this.cells
     }
 
     // updateShip() {
@@ -52,14 +49,12 @@ class Bot {
     //     }
     // }
 
-    recieveAttack([x,y]) {
-        // PubSub.subscribe("position",this.gameBoard.receiveAttack)
-        let board = this.gameBoard.getBoard()
 
-        // if(board[x][y] !== "hit" && board[x][y] !== "miss")
+
+    recieveAttack([x,y]) {
+        let board = this.gameBoard.getBoard()
         const result = this.gameBoard.receiveAttack([x,y])
         return result
-        // this.display()
     }
 
     getValidIndex() {
@@ -72,6 +67,7 @@ class Bot {
             }
         }        
     }
+
     randomAttack() {
         const index = Math.floor(Math.random() * this.availabe.length)
         let {x,y} = this.availabe[index]
@@ -84,7 +80,6 @@ class Bot {
         if(result === "Miss") {
             this.cells[x][y].style.backgroundColor = "green"
         }
-        // this.display()
     }
 
 
