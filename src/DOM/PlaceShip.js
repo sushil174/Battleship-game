@@ -7,6 +7,10 @@ class PlaceShip {
         this.ground = ground
         this.currentShipSize = 0
         this.shipOrientation = "horizontal"
+        this.ship_4 = 1
+        this.ship_3 = 2
+        this.ship_2 = 3
+        this.ship_1 = 4
         this.shipButtons()
     }
 
@@ -29,34 +33,43 @@ class PlaceShip {
         button_4.dataset.value = 4
         
         button_4.addEventListener('click', () => {
-            this.currentShipSize = 4
-            this.cells = []
-            this.display()
+            console.log(this.ship_4)
+            if(this.ship_4 > 0) {
+                this.currentShipSize = 4
+                this.cells = []
+                this.display()
+            }
         })
 
 
         const button_3 = document.createElement('button')
         button_3.dataset.value = 3
         button_3.addEventListener('click', () => {
-            this.currentShipSize = 3
-            this.cells = []
-            this.display()
+            if(this.ship_3 > 0) {
+                this.currentShipSize = 3
+                this.cells = []
+                this.display()
+            }
         })
 
         const button_2 = document.createElement('button')
         button_2.dataset.value = 2
         button_2.addEventListener('click', () => {
-            this.currentShipSize = 2
-            this.cells = []
-            this.display()
+            if(this.ship_2 > 0) {
+                this.currentShipSize = 2
+                this.cells = []
+                this.display()
+            }
         })
 
         const button_1 = document.createElement('button')
         button_1.dataset.value = 1
         button_1.addEventListener('click', () => {
-            this.currentShipSize = 1
-            this.cells = []
-            this.display()
+            if(this.ship_1 > 0) {
+                this.currentShipSize = 1
+                this.cells = []
+                this.display()
+            }
         })
 
 
@@ -117,15 +130,22 @@ class PlaceShip {
         }
         let coords;
         cell.addEventListener('click', () => {
-            if(this.gameBoard.validate(coords)) {
-                const ship = new Ship(shipSize)
-                this.gameBoard.placeShip(ship,coords)
-                for(let [x,y] of coords) {
-                    this.cells[x][y].style.backgroundColor = 'blue'
-                }  
-                this.currentShipSize = 0
-                this.cells = []
-                this.display()
+            if(shipSize) {
+
+                if(this.gameBoard.validate(coords)) {
+                    const ship = new Ship(shipSize)
+                    this.gameBoard.placeShip(ship,coords)
+                    for(let [x,y] of coords) {
+                        this.cells[x][y].style.backgroundColor = 'blue'
+                    }  
+                    this.currentShipSize = 0
+                    this.cells = []
+                    if(shipSize === 4) this.ship_4 -= 1
+                    if(shipSize === 3) this.ship_3 -= 1
+                    if(shipSize === 2) this.ship_2 -= 1
+                    if(shipSize === 1) this.ship_1 -= 1
+                    this.display()
+                }
             }
         })
 
@@ -153,11 +173,16 @@ class PlaceShip {
             }   
         })
         
-        cell.addEventListener('dblclick', (e)=> {
+        cell.addEventListener('contextmenu', (e)=> {
+            e.preventDefault()
             let x = parseInt(e.target.dataset.x)
             let y = parseInt(e.target.dataset.y)
             let board = this.gameBoard.getBoard()
             if(board[x][y] instanceof Ship) {
+                if(board[x][y].getLength() === 4) this.ship_4 += 1
+                if(board[x][y].getLength() === 3) this.ship_3 += 1
+                if(board[x][y].getLength() === 2) this.ship_2 += 1
+                if(board[x][y].getLength() === 1) this.ship_1 += 1
                 this.gameBoard.removeShip(board[x][y])
             }
             this.cells = []
