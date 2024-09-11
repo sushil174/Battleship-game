@@ -7,6 +7,16 @@ class GameBoard {
         this.ships = []
     }
 
+    removeShip(target) {
+        let index = this.ships.findIndex((ship) => ship === target)
+        this.ships.splice(index,1)
+        for(let i = 0; i < 10; i++) {
+            for(let j = 0; j < 10; j++) {
+                if(this.board[i][j] === target) this.board[i][j] = null
+            }
+        }
+    }
+
     getBoard() {
         return this.board
     }

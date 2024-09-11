@@ -23,6 +23,7 @@ class PlaceShip {
         })
 
         const buttonContainer = document.createElement('div')
+        buttonContainer.classList.add('buttonContainer')
         const container = document.querySelector('.container')
         const button_4 = document.createElement('button')
         button_4.dataset.value = 4
@@ -71,7 +72,12 @@ class PlaceShip {
         container.append(buttonContainer)
     }
 
-
+    restart() {
+        const button = document.querySelector('.random')
+        button.addEventListener('click', ()=> {
+            this.shipButtons()
+        })
+    }
     display() {
         this.ground.textContent = ''
         let board = this.gameBoard.getBoard()
@@ -96,7 +102,6 @@ class PlaceShip {
     }
 
     test(cell,shipSize,orientation) {
-        // const ship = [[0,0],[1,0],[2,0],[3,0]]
         let shipCoords = []
         if(orientation === "horizontal") {
             for(let i = 0; i < shipSize; i++) {
@@ -146,6 +151,17 @@ class PlaceShip {
                     this.cells[x][y].style.backgroundColor = 'lightblue'
                 }  
             }   
+        })
+        
+        cell.addEventListener('dblclick', (e)=> {
+            let x = parseInt(e.target.dataset.x)
+            let y = parseInt(e.target.dataset.y)
+            let board = this.gameBoard.getBoard()
+            if(board[x][y] instanceof Ship) {
+                this.gameBoard.removeShip(board[x][y])
+            }
+            this.cells = []
+            this.display()
         })
 
     }
