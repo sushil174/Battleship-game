@@ -46,6 +46,7 @@ class game {
         const playerGameBoard = this.player.getGameBoard()
         
         let current = "player"
+        headline.textContent = "Player turn"
         const cells = document.querySelectorAll(`.cell[data-name="bot"]`);   
 
         for(let cell of cells) {
@@ -57,11 +58,15 @@ class game {
     
                     const result = computerBoard.recieveAttack([x,y])
                     if(result === "Hit") {
-                        e.target.style.backgroundColor = 'red'
+                        // e.target.style.backgroundColor = 'red'
+                        e.target.classList.remove('ship')
+                        e.target.classList.add('hit')
                     }
         
                     if(result === "Miss") {
-                        e.target.style.backgroundColor = 'green'}
+                        // e.target.style.backgroundColor = 'green'
+                        e.target.classList.add('miss')
+                    }
                 }
                 cell.removeEventListener('click', handleClick)
     

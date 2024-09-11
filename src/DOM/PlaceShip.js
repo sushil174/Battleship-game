@@ -13,6 +13,7 @@ class PlaceShip {
         this.ship_2 = 3
         this.ship_1 = 4
         this.shipButtons()
+        document.querySelector('.headline').textContent = "Placing ships..."
     }
 
     shipButtons() {
@@ -93,7 +94,7 @@ class PlaceShip {
         button_3.textContent = "+++"
         button_2.textContent = "++"
         button_1.textContent = "+"
-        
+
         buttonContainer.append(button_4)
         buttonContainer.append(button_3)
         buttonContainer.append(button_2)
@@ -117,7 +118,8 @@ class PlaceShip {
                 cell.dataset.name = this.name
 
                 if(board[i][j] instanceof Ship ) {
-                    cell.style.backgroundColor = "blue"
+                    // cell.style.backgroundColor = "blue"
+                    cell.classList.add('ship')
                 }
                 this.ground.append(cell)
                 row.push(cell)
@@ -154,7 +156,8 @@ class PlaceShip {
                     const ship = new Ship(shipSize)
                     this.gameBoard.placeShip(ship,coords)
                     for(let [x,y] of coords) {
-                        this.cells[x][y].style.backgroundColor = 'blue'
+                        // this.cells[x][y].style.backgroundColor = 'blue'
+                        this.cells[x][y].classList.add('ship')
                     }  
                     this.currentShipSize = 0
                     this.cells = []
@@ -183,10 +186,10 @@ class PlaceShip {
                 return [a[0] + x, a[1] + y]
             })
             let result = this.gameBoard.validate(coords) 
-            let color = 'yellow'
             if(result) {
                 for(let [x,y] of coords) {
-                    this.cells[x][y].style.backgroundColor = color
+                    // this.cells[x][y].style.backgroundColor = color
+                    this.cells[x][y].classList.add('placing')
                 }   
             }
         })
@@ -194,7 +197,8 @@ class PlaceShip {
         cell.addEventListener('mouseleave', () => {
             if(this.gameBoard.validate(coords)) {
                 for(let [x,y] of coords) {
-                    this.cells[x][y].style.backgroundColor = 'lightblue'
+                    this.cells[x][y].classList.remove('placing')
+                    // this.cells[x][y].style.backgroundColor = 'lightblue'
                 }  
             }   
         })

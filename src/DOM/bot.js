@@ -32,7 +32,8 @@ class Bot {
                 }
 
                 if(board[i][j] instanceof Ship ) {
-                    cell.style.backgroundColor = "blue"
+                    // cell.style.backgroundColor = "blue"
+                    cell.classList.add('ship')
                 }
 
             }
@@ -64,11 +65,14 @@ class Bot {
         this.availabe.splice(index,1)
         const result = this.gameBoard.receiveAttack([x,y])
         if(result === "Hit") {
-            this.cells[x][y].style.backgroundColor = "red"
+            // this.cells[x][y].style.backgroundColor = "red"
+            this.cells[x][y].classList.remove('ship')
+            this.cells[x][y].classList.add('hit')
         }
         
         if(result === "Miss") {
-            this.cells[x][y].style.backgroundColor = "green"
+            // this.cells[x][y].style.backgroundColor = "green"
+            this.cells[x][y].classList.add('miss')
         }
     }
 
@@ -116,7 +120,9 @@ class Bot {
             this.gameBoard.placeShip(ship,coords)
             if(this.show) {
                 for(let [x,y] of coords) {
-                    this.cells[x][y].style.backgroundColor = "blue"
+                    // this.cells[x][y].style.backgroundColor = "blue"
+                    this.cells[x][y].classList.add('ship')
+
                 }
             }
         }
