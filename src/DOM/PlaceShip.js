@@ -1,8 +1,9 @@
 import Ship from "../Ship"
 
 class PlaceShip {
-    constructor(gameBoard,ground) {
+    constructor(name,gameBoard,ground) {
         this.gameBoard = gameBoard
+        this.name = name
         this.cells = []
         this.ground = ground
         this.currentShipSize = 0
@@ -78,19 +79,14 @@ class PlaceShip {
         button_2.textContent = "++"
         button_1.textContent = "+"
         buttonContainer.append(button_4)
-        buttonContainer.append(button_2)
         buttonContainer.append(button_3)
+        buttonContainer.append(button_2)
         buttonContainer.append(button_1)
         buttonContainer.append(changeOrientation)
         container.append(buttonContainer)
     }
 
-    restart() {
-        const button = document.querySelector('.random')
-        button.addEventListener('click', ()=> {
-            this.shipButtons()
-        })
-    }
+
     display() {
         this.ground.textContent = ''
         let board = this.gameBoard.getBoard()
@@ -101,6 +97,7 @@ class PlaceShip {
                 cell.classList.add('cell')
                 cell.dataset.x = i
                 cell.dataset.y = j
+                cell.dataset.name = this.name
 
                 if(board[i][j] instanceof Ship ) {
                     cell.style.backgroundColor = "blue"
@@ -112,6 +109,10 @@ class PlaceShip {
             }
             this.cells.push(row)
         }
+    }
+
+    checkShips() {
+        return this.ship_1 <= 0 && this.ship_2 <= 0 && this.ship_3 <= 0 && this.ship_4 <= 0
     }
 
     test(cell,shipSize,orientation) {
@@ -144,8 +145,16 @@ class PlaceShip {
                     if(shipSize === 3) this.ship_3 -= 1
                     if(shipSize === 2) this.ship_2 -= 1
                     if(shipSize === 1) this.ship_1 -= 1
+
+                    if(this.checkShips()) {
+                        this.cells = []
+                        this.ground.textContent = ''
+                        document.dispatchEvent(new Event('shipPlaced'));
+                        return;
+                    }
                     this.display()
                 }
+
             }
         })
 

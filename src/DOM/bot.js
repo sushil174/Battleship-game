@@ -40,17 +40,6 @@ class Bot {
         return this.cells
     }
 
-    // updateShip() {
-    //     const ships = this.gameBoard.getShips()
-    //     for(let ship of ships) {
-    //         for(let [x,y] of ship.getPosition()) {
-    //             this.cells[x][y].style.backgroundColor = 'blue'
-    //         }
-    //     }
-    // }
-
-
-
     recieveAttack([x,y]) {
         let board = this.gameBoard.getBoard()
         const result = this.gameBoard.receiveAttack([x,y])
