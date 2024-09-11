@@ -3,7 +3,7 @@ import Ship from "./Ship"
 class GameBoard {
     constructor(size = 10) {
         this.size = size
-        this.board = Array(size).fill(null).map(() => Array(size).fill(null))
+        this.board = Array(size).fill(null).map(() => Array(this.size).fill(null))
         this.ships = []
     }
 
@@ -15,6 +15,11 @@ class GameBoard {
                 if(this.board[i][j] === target) this.board[i][j] = null
             }
         }
+    }
+
+    removeAllShip() {
+        this.ship = []
+        this.board = Array(size).fill(null).map(() => Array(this.size).fill(null))
     }
 
     getBoard() {

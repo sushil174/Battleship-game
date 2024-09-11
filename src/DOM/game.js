@@ -1,4 +1,3 @@
-import BoardDom from "./gameBoardDom";
 import Player from "../Player";
 import Bot from "./bot.js"
 import PlaceShip from "./PlaceShip.js";
@@ -15,7 +14,26 @@ class game {
     
     }
 
+    getPlayer() {
+        return this.player
+    }
+    
+    getComputer() {
+        return this.computer
+    }
+
+    reset() {
+        this.player1.textContent = ''
+        this.player2.textContent = ''
+        // this.player.getGameBoard().removeAllShip()
+        // this.computer.getGameBoard().removeAllShip()
+        document.querySelector('.headline').textcontent = ''
+        document.querySelector('.restart').style.display = 'none'
+    }
+
     startGame() {
+        this.player1.classList.add('grid')
+        this.player2.classList.add('grid')
         const headline = document.querySelector('.headline')
         const playerBoard = new Bot("player",this.player.getGameBoard(),this.player1)    
         const computerBoard = new Bot("bot",this.computer.getGameBoard(),this.player2)
@@ -38,7 +56,6 @@ class game {
                 if(current === "player" && name === "bot") {
     
                     const result = computerBoard.recieveAttack([x,y])
-                    // console.log(result)
                     if(result === "Hit") {
                         e.target.style.backgroundColor = 'red'
                     }
@@ -50,6 +67,7 @@ class game {
     
                 if(computerGameBoard.allSunk()) {
                     alert("player won")
+                    document.querySelector('.restart').style.display = 'block'
                     return
                 }
     
@@ -59,11 +77,12 @@ class game {
                     playerBoard.randomAttack()
                     if(playerGameBoard.allSunk()) {
                         alert("bot won")
+                        document.querySelector('.restart').style.display = 'block'
                         return
                     }
                     current = "player"
                     headline.textContent = "player turn"
-                },1000)
+                },100)
             })
         }
     }

@@ -10,6 +10,7 @@ class Bot {
     }
 
     display() {
+        this.player.textContent = ''
         let board = this.gameBoard.getBoard()
         for(let i = 0; i < 10; i++) {
             let row = []

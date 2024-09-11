@@ -16,6 +16,20 @@ class PlaceShip {
     }
 
     shipButtons() {
+
+        const begin = document.createElement('button') 
+        begin.textContent = "Start"
+        begin.addEventListener('click', () => {
+            if(this.checkShips()) {
+                this.cells = []
+                this.ground.textContent = ''
+                
+                document.dispatchEvent(new Event('shipPlaced'));
+                return
+            }
+            alert("place all ships first")
+        })
+
         const changeOrientation = document.createElement('button')
         changeOrientation.textContent = this.shipOrientation
 
@@ -29,7 +43,8 @@ class PlaceShip {
 
         const buttonContainer = document.createElement('div')
         buttonContainer.classList.add('buttonContainer')
-        const container = document.querySelector('.container')
+        const container = document.querySelector('.player2')
+        container.classList.remove('grid')
         const button_4 = document.createElement('button')
         button_4.dataset.value = 4
         
@@ -78,11 +93,13 @@ class PlaceShip {
         button_3.textContent = "+++"
         button_2.textContent = "++"
         button_1.textContent = "+"
+        
         buttonContainer.append(button_4)
         buttonContainer.append(button_3)
         buttonContainer.append(button_2)
         buttonContainer.append(button_1)
         buttonContainer.append(changeOrientation)
+        buttonContainer.append(begin)
         container.append(buttonContainer)
     }
 
@@ -146,12 +163,12 @@ class PlaceShip {
                     if(shipSize === 2) this.ship_2 -= 1
                     if(shipSize === 1) this.ship_1 -= 1
 
-                    if(this.checkShips()) {
-                        this.cells = []
-                        this.ground.textContent = ''
-                        document.dispatchEvent(new Event('shipPlaced'));
-                        return;
-                    }
+                    // if(this.checkShips()) {
+                    //     this.cells = []
+                    //     this.ground.textContent = ''
+                    //     document.dispatchEvent(new Event('shipPlaced'));
+                    //     return;
+                    // }
                     this.display()
                 }
 
