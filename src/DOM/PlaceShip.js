@@ -6,10 +6,22 @@ class PlaceShip {
         this.cells = []
         this.ground = ground
         this.currentShipSize = 0
+        this.shipOrientation = "horizontal"
         this.shipButtons()
     }
 
     shipButtons() {
+        const changeOrientation = document.createElement('button')
+        changeOrientation.textContent = this.shipOrientation
+
+        changeOrientation.addEventListener('click', () => {
+            if(this.shipOrientation === "horizontal") this.shipOrientation = "vertical"
+            else this.shipOrientation = "horizontal"
+            changeOrientation.textContent = this.shipOrientation
+            this.cells = []
+            this.display()
+        })
+
         const buttonContainer = document.createElement('div')
         const container = document.querySelector('.container')
         const button_4 = document.createElement('button')
@@ -55,6 +67,7 @@ class PlaceShip {
         buttonContainer.append(button_2)
         buttonContainer.append(button_3)
         buttonContainer.append(button_1)
+        buttonContainer.append(changeOrientation)
         container.append(buttonContainer)
     }
 
@@ -75,21 +88,28 @@ class PlaceShip {
                 }
                 this.ground.append(cell)
                 row.push(cell)
-                this.test(cell,this.currentShipSize)
+                this.test(cell,this.currentShipSize,this.shipOrientation)
                 
             }
             this.cells.push(row)
         }
     }
 
-    test(cell,shipSize) {
+    test(cell,shipSize,orientation) {
         // const ship = [[0,0],[1,0],[2,0],[3,0]]
         let shipCoords = []
-        for(let i = 0; i < shipSize; i++) {
-            let position = [0,i]
-            shipCoords.push(position)
+        if(orientation === "horizontal") {
+            for(let i = 0; i < shipSize; i++) {
+                let position = [0,i]
+                shipCoords.push(position)
+            }
         }
-
+        else {
+            for(let i = 0; i < shipSize; i++) {
+                let position = [i,0]
+                shipCoords.push(position)
+            }
+        }
         let coords;
         cell.addEventListener('click', () => {
             if(this.gameBoard.validate(coords)) {
