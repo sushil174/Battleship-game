@@ -12,19 +12,34 @@ class PlaceShip {
         this.ship_3 = 2
         this.ship_2 = 3
         this.ship_1 = 4
+        this.span_1 = document.createElement('span')
+        this.span_2 = document.createElement('span')
+        this.span_3 = document.createElement('span')
+        this.span_4 = document.createElement('span')
         this.shipButtons()
-        document.querySelector('.headline').textContent = "Placing ships..."
+    }
+    
+    createShipDiv(container,button,span,count) {
+        const div = document.createElement('div')
+        span.textContent = `x ${count}`
+        div.append(button)
+        div.append(span)
+        container.append(div)
     }
 
+    updateShipCount() {
+        this.span_1.textContent = `x ${this.ship_1}`
+        this.span_2.textContent = `x ${this.ship_2}`
+        this.span_3.textContent = `x ${this.ship_3}`
+        this.span_4.textContent = `x ${this.ship_4}`
+    }
     shipButtons() {
-
         const begin = document.createElement('button') 
         begin.textContent = "Start"
         begin.addEventListener('click', () => {
             if(this.checkShips()) {
                 this.cells = []
                 this.ground.textContent = ''
-                
                 document.dispatchEvent(new Event('shipPlaced'));
                 return
             }
@@ -46,11 +61,11 @@ class PlaceShip {
         buttonContainer.classList.add('buttonContainer')
         const container = document.querySelector('.player2')
         container.classList.remove('grid')
+
+
         const button_4 = document.createElement('button')
         button_4.dataset.value = 4
-        
         button_4.addEventListener('click', () => {
-            console.log(this.ship_4)
             if(this.ship_4 > 0) {
                 this.currentShipSize = 4
                 this.cells = []
@@ -95,10 +110,15 @@ class PlaceShip {
         button_2.textContent = "++"
         button_1.textContent = "+"
 
-        buttonContainer.append(button_4)
-        buttonContainer.append(button_3)
-        buttonContainer.append(button_2)
-        buttonContainer.append(button_1)
+        this.createShipDiv(container,button_4,this.span_4,1)
+        this.createShipDiv(container,button_3,this.span_3,2)
+        this.createShipDiv(container,button_2,this.span_2,3)
+        this.createShipDiv(container,button_1,this.span_1,4)
+        // buttonContainer.append(button_4)
+        // buttonContainer.append(button_3)
+        // buttonContainer.append(button_2)
+        // buttonContainer.append(button_1)
+
         buttonContainer.append(changeOrientation)
         buttonContainer.append(begin)
         container.append(buttonContainer)
@@ -165,7 +185,7 @@ class PlaceShip {
                     if(shipSize === 3) this.ship_3 -= 1
                     if(shipSize === 2) this.ship_2 -= 1
                     if(shipSize === 1) this.ship_1 -= 1
-
+                    this.updateShipCount()
                     // if(this.checkShips()) {
                     //     this.cells = []
                     //     this.ground.textContent = ''
@@ -214,6 +234,7 @@ class PlaceShip {
                 if(board[x][y].getLength() === 2) this.ship_2 += 1
                 if(board[x][y].getLength() === 1) this.ship_1 += 1
                 this.gameBoard.removeShip(board[x][y])
+                this.updateShipCount()
             }
             this.cells = []
             this.display()

@@ -71,3 +71,8 @@ body{
 .miss {
     background-color: rgb(132, 136, 132);
 }
+
+.headline ,H2{
+    padding: 2em;
+    text-align: center;
+}
