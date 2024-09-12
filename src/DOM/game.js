@@ -70,7 +70,8 @@ class game {
                         e.target.classList.add('miss')
                     }
                 }
-                cell.removeEventListener('click', handleClick)
+                if(current === "player")
+                    cell.removeEventListener('click', handleClick)
     
                 if(computerGameBoard.allSunk()) {
                     // alert("player won")
@@ -90,7 +91,7 @@ class game {
                     }
                     current = "player"
                     headline.textContent = "player turn"
-                },100)
+                },1000)
             })
         }
     }
