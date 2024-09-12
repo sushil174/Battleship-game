@@ -1,3 +1,19 @@
+body{
+    margin: 0;
+    min-height: 100vh;
+    background-image: linear-gradient(135deg,#EEF5FF,#B4D4FF,#86B6F6,#176B87);
+    background-size: 300%;
+    animation: bg-animation 15s infinite alternate;
+}
+@keyframes bg-animation {
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
+}
 .container {
     display: flex;
     flex-direction: column;
@@ -6,18 +22,22 @@
 .ground{
     display: flex;
     gap : 100px;
+    justify-content: center;
+
+    
 }
 .grid {
     display: grid;
     grid-template-columns: repeat(10,50px);
     grid-template-rows: repeat(10,50px);
-    border: 1px solid rgb(158, 158, 243);
+    border: 0.5px solid rgba(85, 103, 156, 0.8);
 }
 
 .cell{
+    box-sizing: border-box;
     height: 50px;
     width: 50px;
-    border: 1px solid rgb(158, 158, 243);
+    border: 1px solid rgba(85, 103, 156, 0.8);
 }
 
 .buttonContainer {
@@ -27,18 +47,27 @@
 }
 
 .placing {
-    border: 0.5px solid rgba(34, 57, 34, 0.5);
-    background-color: rgb(123, 235, 123, 0.2);
+    border: 2px dashed rgba(34, 57, 34, 0.5);
+
+    /* background-color: rgb(123, 235, 123, 0.2); */
+    background-color: rgb(0, 128, 128,0.5);
+    /* background-image: linear-gradient(180deg,rgba(191, 246, 195, 0.5), rgba(176, 235, 180, 0.5)); */
 }
 
 .ship {
-    background-color: rgb(162, 104, 216,0.5);
+    /* background-color: rgb(162, 104, 216,0.5); */
+    background-color: rgb(04, 117, 126 );
+    border: 1px solid rgb(04, 117, 126 );
 }
 
 .hit{
-    background-color: #f06a49;
+    /* background-color: #f06a49; */
+    background-image: linear-gradient(45deg,rgb(203,53,61),rgb(249,182,78),rgb(237,98,64));
+    background-size: 300%;
+    animation: bg-animation 15s infinite alternate;
+    border: rgb(249,182,78)
 }
 
 .miss {
-    background-color: #a9d6e5;
+    background-color: rgb(132, 136, 132);
 }
