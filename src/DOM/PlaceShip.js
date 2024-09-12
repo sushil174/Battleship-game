@@ -21,6 +21,7 @@ class PlaceShip {
     
     createShipDiv(container,button,span,count) {
         const div = document.createElement('div')
+        button.classList.add('shipButtons')
         span.textContent = `x ${count}`
         div.append(button)
         div.append(span)
@@ -32,6 +33,9 @@ class PlaceShip {
         this.span_2.textContent = `x ${this.ship_2}`
         this.span_3.textContent = `x ${this.ship_3}`
         this.span_4.textContent = `x ${this.ship_4}`
+    }
+    updateSelected() {
+        Array.from(document.querySelectorAll('.shipButtons')).forEach(button => button.classList.remove('selected'))
     }
     shipButtons() {
         const begin = document.createElement('button') 
@@ -67,6 +71,8 @@ class PlaceShip {
         button_4.dataset.value = 4
         button_4.addEventListener('click', () => {
             if(this.ship_4 > 0) {
+                this.updateSelected()
+                button_4.classList.add('selected')
                 this.currentShipSize = 4
                 this.cells = []
                 this.display()
@@ -78,6 +84,8 @@ class PlaceShip {
         button_3.dataset.value = 3
         button_3.addEventListener('click', () => {
             if(this.ship_3 > 0) {
+                this.updateSelected()
+                button_3.classList.add('selected')
                 this.currentShipSize = 3
                 this.cells = []
                 this.display()
@@ -88,6 +96,8 @@ class PlaceShip {
         button_2.dataset.value = 2
         button_2.addEventListener('click', () => {
             if(this.ship_2 > 0) {
+                this.updateSelected()
+                button_2.classList.add('selected')
                 this.currentShipSize = 2
                 this.cells = []
                 this.display()
@@ -98,6 +108,8 @@ class PlaceShip {
         button_1.dataset.value = 1
         button_1.addEventListener('click', () => {
             if(this.ship_1 > 0) {
+                this.updateSelected()
+                button_1.classList.add('selected')
                 this.currentShipSize = 1
                 this.cells = []
                 this.display()
@@ -114,10 +126,6 @@ class PlaceShip {
         this.createShipDiv(container,button_3,this.span_3,2)
         this.createShipDiv(container,button_2,this.span_2,3)
         this.createShipDiv(container,button_1,this.span_1,4)
-        // buttonContainer.append(button_4)
-        // buttonContainer.append(button_3)
-        // buttonContainer.append(button_2)
-        // buttonContainer.append(button_1)
 
         buttonContainer.append(changeOrientation)
         buttonContainer.append(begin)
@@ -138,7 +146,6 @@ class PlaceShip {
                 cell.dataset.name = this.name
 
                 if(board[i][j] instanceof Ship ) {
-                    // cell.style.backgroundColor = "blue"
                     cell.classList.add('ship')
                 }
                 this.ground.append(cell)
@@ -176,22 +183,41 @@ class PlaceShip {
                     const ship = new Ship(shipSize)
                     this.gameBoard.placeShip(ship,coords)
                     for(let [x,y] of coords) {
-                        // this.cells[x][y].style.backgroundColor = 'blue'
                         this.cells[x][y].classList.add('ship')
                     }  
-                    this.currentShipSize = 0
+                   
+
                     this.cells = []
-                    if(shipSize === 4) this.ship_4 -= 1
-                    if(shipSize === 3) this.ship_3 -= 1
-                    if(shipSize === 2) this.ship_2 -= 1
-                    if(shipSize === 1) this.ship_1 -= 1
+                    if(shipSize === 4){
+                        this.ship_4 -= 1
+                        if(!this.ship_4) {
+                            this.currentShipSize = 0
+                            this.updateSelected()
+                        }
+                    } 
+                    if(shipSize === 3) {
+                        this.ship_3 -= 1
+                        if(!this.ship_3) {
+                            this.currentShipSize = 0
+                            this.updateSelected()
+                        }
+                    }
+                    if(shipSize === 2) {
+                        this.ship_2 -= 1
+                        if(!this.ship_2) {
+                            this.currentShipSize = 0
+                            this.updateSelected()
+                        }
+                    }
+                    if(shipSize === 1) {
+                        this.ship_1 -= 1
+                        if(!this.ship_1) {
+                            this.currentShipSize = 0
+                            this.updateSelected()
+                        }
+                    }
                     this.updateShipCount()
-                    // if(this.checkShips()) {
-                    //     this.cells = []
-                    //     this.ground.textContent = ''
-                    //     document.dispatchEvent(new Event('shipPlaced'));
-                    //     return;
-                    // }
+                    
                     this.display()
                 }
 
@@ -208,7 +234,6 @@ class PlaceShip {
             let result = this.gameBoard.validate(coords) 
             if(result) {
                 for(let [x,y] of coords) {
-                    // this.cells[x][y].style.backgroundColor = color
                     this.cells[x][y].classList.add('placing')
                 }   
             }
@@ -218,7 +243,6 @@ class PlaceShip {
             if(this.gameBoard.validate(coords)) {
                 for(let [x,y] of coords) {
                     this.cells[x][y].classList.remove('placing')
-                    // this.cells[x][y].style.backgroundColor = 'lightblue'
                 }  
             }   
         })
