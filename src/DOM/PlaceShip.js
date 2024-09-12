@@ -21,6 +21,7 @@ class PlaceShip {
     
     createShipDiv(container,button,span,count) {
         const div = document.createElement('div')
+        div.classList.add('shipDiv')
         button.classList.add('shipButtons')
         span.textContent = `x ${count}`
         div.append(button)
@@ -54,8 +55,8 @@ class PlaceShip {
         changeOrientation.textContent = this.shipOrientation
 
         changeOrientation.addEventListener('click', () => {
-            if(this.shipOrientation === "horizontal") this.shipOrientation = "vertical"
-            else this.shipOrientation = "horizontal"
+            if(this.shipOrientation === "Horizontal") this.shipOrientation = "Vertical"
+            else this.shipOrientation = "Horizontal"
             changeOrientation.textContent = this.shipOrientation
             this.cells = []
             this.display()
@@ -65,7 +66,7 @@ class PlaceShip {
         buttonContainer.classList.add('buttonContainer')
         const container = document.querySelector('.player2')
         container.classList.remove('grid')
-
+        container.classList.remove('ai-grid')
 
         const button_4 = document.createElement('button')
         button_4.dataset.value = 4
@@ -115,13 +116,6 @@ class PlaceShip {
                 this.display()
             }
         })
-
-
-        button_4.textContent = "++++"
-        button_3.textContent = "+++"
-        button_2.textContent = "++"
-        button_1.textContent = "+"
-
         this.createShipDiv(container,button_4,this.span_4,1)
         this.createShipDiv(container,button_3,this.span_3,2)
         this.createShipDiv(container,button_2,this.span_2,3)
@@ -129,7 +123,10 @@ class PlaceShip {
 
         buttonContainer.append(changeOrientation)
         buttonContainer.append(begin)
+        const p = document.createElement('p')
+        p.textContent = "[ right click on ship to remove it from board ]"
         container.append(buttonContainer)
+        container.append(p)
     }
 
 

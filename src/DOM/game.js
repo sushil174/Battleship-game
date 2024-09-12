@@ -27,13 +27,15 @@ class game {
         this.player2.textContent = ''
         // this.player.getGameBoard().removeAllShip()
         // this.computer.getGameBoard().removeAllShip()
-        document.querySelector('.headline').textcontent = ''
+        document.querySelector('.headline').textContent = ''
         document.querySelector('.restart').style.display = 'none'
     }
 
     startGame() {
         this.player1.classList.add('grid')
         this.player2.classList.add('grid')
+        this.player1.classList.add('player-grid')
+        this.player2.classList.add('ai-grid')
         const headline = document.querySelector('.headline')
         const playerBoard = new Bot("player",this.player.getGameBoard(),this.player1)    
         const computerBoard = new Bot("bot",this.computer.getGameBoard(),this.player2)
@@ -71,7 +73,8 @@ class game {
                 cell.removeEventListener('click', handleClick)
     
                 if(computerGameBoard.allSunk()) {
-                    alert("player won")
+                    // alert("player won")
+                    headline.textContent = 'Player Won !!!'
                     document.querySelector('.restart').style.display = 'block'
                     return
                 }
@@ -81,7 +84,7 @@ class game {
                 setTimeout(() => {
                     playerBoard.randomAttack()
                     if(playerGameBoard.allSunk()) {
-                        alert("bot won")
+                        headline.textContent = "Ai Won !!!"
                         document.querySelector('.restart').style.display = 'block'
                         return
                     }
