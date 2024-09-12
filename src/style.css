@@ -153,13 +153,15 @@ button[data-value = '1'] {
 
 .shipDiv{
     padding-block: 10px;
+	display: flex;
+	align-items: center;
 }
 
 .shipDiv span {
     padding: 10px;
 }
 
-.buttonContainer button:nth-last-child(2), .buttonContainer button:last-child{
+.buttonContainer button:nth-last-child(2), .buttonContainer button:last-child,.restart{
     font-size: 1.2rem;
     font-family: 'myFont';
     min-height: 50px;
@@ -169,7 +171,17 @@ button[data-value = '1'] {
     transition: 0.3s;
 }
 
+.restart {
+	font-size:2rem;
+	margin: 0 auto;
+	margin-top: 1em;
+	padding: 0.3em 1em;
+}
 
+.restart:hover {
+	background-color: var(--ship-color);
+    color: white;
+}
 .buttonContainer button:nth-last-child(2):hover {
     background-color: var(--ship-color);
     color: white;

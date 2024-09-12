@@ -7,7 +7,7 @@ class PlaceShip {
         this.cells = []
         this.ground = ground
         this.currentShipSize = 0
-        this.shipOrientation = "horizontal"
+        this.shipOrientation = "Horizontal"
         this.ship_4 = 1
         this.ship_3 = 2
         this.ship_2 = 3
@@ -160,7 +160,7 @@ class PlaceShip {
 
     test(cell,shipSize,orientation) {
         let shipCoords = []
-        if(orientation === "horizontal") {
+        if(orientation === "Horizontal") {
             for(let i = 0; i < shipSize; i++) {
                 let position = [0,i]
                 shipCoords.push(position)
