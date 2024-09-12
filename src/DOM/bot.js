@@ -23,17 +23,10 @@ class Bot {
                 this.player.append(cell)
                 row.push(cell)
 
-                if(board[i][j] === "hit") {
-                    cell.style.backgroundColor = 'red'
-                }
-                
-                if(board[i][j] === "miss") {
-                    cell.style.backgroundColor = 'green'
-                }
-
                 if(board[i][j] instanceof Ship ) {
                     // cell.style.backgroundColor = "blue"
-                    cell.classList.add('ship')
+					if(this.name === "player")
+                    	cell.classList.add('ship')
                 }
 
             }
@@ -121,7 +114,8 @@ class Bot {
             if(this.show) {
                 for(let [x,y] of coords) {
                     // this.cells[x][y].style.backgroundColor = "blue"
-                    this.cells[x][y].classList.add('ship')
+					if(this.name === "player")
+                    	this.cells[x][y].classList.add('ship')
 
                 }
             }
