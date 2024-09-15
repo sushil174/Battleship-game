@@ -64,7 +64,7 @@ class game {
                         e.target.classList.remove('ship')
                         e.target.classList.add('hit')
                     }
-        
+                    
                     if(result === "Miss") {
                         // e.target.style.backgroundColor = 'green'
                         e.target.classList.add('miss')

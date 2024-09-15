@@ -173,6 +173,7 @@ class PlaceShip {
             }
         }
         let coords;
+
         cell.addEventListener('click', () => {
             if(shipSize) {
 
@@ -240,8 +241,10 @@ class PlaceShip {
             if(this.gameBoard.validate(coords)) {
                 for(let [x,y] of coords) {
                     this.cells[x][y].classList.remove('placing')
+                    this.cells[x][y].classList.remove('not-valid')
                 }  
             }   
+
         })
         
         cell.addEventListener('contextmenu', (e)=> {

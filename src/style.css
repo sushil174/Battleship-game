@@ -12,9 +12,9 @@
     --cell-border-color :rgba(85, 103, 156, 0.8);
     --ship-color : rgb(04, 117, 126);
     --miss-color : rgb(132, 136, 132);
-    --hit-gradient : linear-gradient(45deg,rgba(203,53,61,0.8),rgba(249,182,78,0.8),rgba(237,98,64,0.8));
+    --hit-gradient : radial-gradient(rgba(203,53,61,0.8),rgba(249,182,78,0.8),rgba(237,98,64,0.8));
     --hit-border : rgb(249,182,78);
-    --body-gradient : linear-gradient(135deg,#EEF5FF,#B4D4FF,#86B6F6,#176B87);
+    --body-gradient : linear-gradient(135deg,#B4D4FF,#86B6F6,#176B87);
 }
 
 body{
@@ -22,8 +22,8 @@ body{
     margin: 0;
     min-height: 100vh;
     background-image: var(--body-gradient);
-    background-size: 300%;
-    animation: bg-animation 15s infinite alternate;
+    /* background-size: 300%;
+    animation: bg-animation 15s infinite alternate; */
 }
 
 @keyframes bg-animation {
@@ -35,6 +35,7 @@ body{
         background-position: right;
     }
 }
+
 .container {
     display: flex;
     flex-direction: column;
@@ -87,8 +88,7 @@ body{
 }
 
 .placing ,.selected{
-    border: 2px dashed rgba(34, 57, 34, 0.5) !important;
-
+    border: 2px dashed rgba(34, 57, 34, 0.5)!important;
     /* background-color: rgb(123, 235, 123, 0.2); */
     background-color: rgb(0, 128, 128,0.5) !important;
     /* background-image: linear-gradient(180deg,rgba(191, 246, 195, 0.5), rgba(176, 235, 180, 0.5)); */
@@ -97,8 +97,8 @@ body{
 .hit{
     /* background-color: #f06a49; */
     background-image: var(--hit-gradient);
-    background-size: 300%;
-    animation: bg-animation 15s infinite alternate;
+    /* background-size: 300%;
+    animation: bg-animation 15s infinite alternate; */
     border: var(--hit-border)
 }
 
