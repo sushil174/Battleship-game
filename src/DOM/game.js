@@ -85,13 +85,13 @@ class game {
                 setTimeout(() => {
                     playerBoard.randomAttack()
                     if(playerGameBoard.allSunk()) {
-                        headline.textContent = "Ai Won !!!"
+                        headline.textContent = "AI Won !!!"
                         document.querySelector('.restart').style.display = 'block'
                         return
                     }
                     current = "player"
-                    headline.textContent = "player turn"
-                },1000)
+                    headline.textContent = "Player turn"
+                },500)
             })
         }
     }
