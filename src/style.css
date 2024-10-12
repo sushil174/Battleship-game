@@ -11,8 +11,8 @@
     --cell-size : 50px;
     --cell-border-color :rgba(85, 103, 156, 0.8);
     --ship-color : rgb(04, 117, 126);
-    --miss-color : rgb(132, 136, 132);
-    --hit-gradient : radial-gradient(rgba(203,53,61,0.8),rgba(249,182,78,0.8),rgba(237,98,64,0.8));
+    --miss-color : rgba(12, 86, 111,.6);
+    --hit-gradient : radial-gradient(rgba(203,53,61,0.8),rgba(249,182,78,0.8),rgba(237,98,64,0.8), transparent);
     --hit-border : rgb(249,182,78);
     --body-gradient : linear-gradient(135deg,#B4D4FF,#86B6F6,#176B87);
 }

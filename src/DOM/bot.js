@@ -28,13 +28,24 @@ class Bot {
 					if(this.name === "player")
                     	cell.classList.add('ship')
                 }
-
             }
             this.cells.push(row)
         }
         return this.cells
     }
 
+    sunkedShip() {
+        const ships = this.gameBoard.getShips() 
+        for(let ship of ships) {
+            if(ship.isSunk()) {
+                const coords = ship.getPosition() 
+                for(let [x,y] of coords) {
+                    this.cells[x][y].style.backgroundColor = "purple"
+                }
+            }
+        }
+    }
+    
     recieveAttack([x,y]) {
         let board = this.gameBoard.getBoard()
         const result = this.gameBoard.receiveAttack([x,y])
