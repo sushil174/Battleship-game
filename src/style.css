@@ -15,13 +15,15 @@
     --hit-gradient : radial-gradient(rgba(203,53,61,0.8),rgba(249,182,78,0.8),rgba(237,98,64,0.8), transparent);
     --hit-border : rgb(249,182,78);
     --body-gradient : linear-gradient(135deg,#B4D4FF,#86B6F6,#176B87);
+    --body-color : #86B6F6;
 }
 
 body{
     font-family: 'myFont';
     margin: 0;
     min-height: 100vh;
-    background-image: var(--body-gradient);
+    /* background-image: var(--body-gradient); */
+    background-color: var(--body-color);
     /* background-size: 300%;
     animation: bg-animation 15s infinite alternate; */
 }
@@ -52,7 +54,7 @@ body{
     display: grid;
     grid-template-columns: repeat(10,var(--cell-size));
     grid-template-rows: repeat(10,var(--cell-size));
-    border: 0.5px solid black;
+    outline: 0.5px solid black;
     padding: 10px;
     
 }
@@ -74,7 +76,7 @@ body{
     font-family: 'Courier New', Courier, monospace;
     position: absolute;
     transform: translate(-50%,-50%);
-    background-color: #86B6F6;
+    background-color: var(--body-color);
     line-height: 15px;
     left: 50%;
     /* bottom: calc(100% - 6px);
