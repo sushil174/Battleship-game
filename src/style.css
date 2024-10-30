@@ -27,7 +27,9 @@ body{
     /* background-size: 300%;
     animation: bg-animation 15s infinite alternate; */
 }
-
+button {
+    cursor: pointer;
+}
 @keyframes bg-animation {
     0% {
         background-position: left;
@@ -159,6 +161,12 @@ button[data-value = '1'] {
 	align-items: center;
 }
 
+.shipDiv button {
+    cursor: pointer;
+}
+.shipDiv button:hover {
+    background-color: #11627d;
+}
 .shipDiv span {
     padding: 10px;
 }
